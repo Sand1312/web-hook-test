@@ -1,1 +1,21 @@
+name: Send Email
 
+on:
+  workflow_dispatch:
+  repository_dispatch:
+    types: [send_email]
+
+jobs:
+  send_email:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send Email
+        uses: dawidd6/action-send-mail@v3
+        with:
+          smtp-server: smtp.example.com
+          smtp-port: 587
+          smtp-username: your_email@example.com
+          smtp-password: ${{ secrets.SMTP_PASSWORD }}
+          to: recipient@example.com
+          subject: "Alert"
+          body: "This is the alert message."
